@@ -1,2 +1,6 @@
-# roguelike-deckbuilder
-Unity roguelike deckbuilding game
+Unity roguelike deckbuilding game project.
+
+Focus:
+- Card System
+- Turn-based Combat
+- Status Effect
