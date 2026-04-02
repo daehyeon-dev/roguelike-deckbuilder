@@ -225,7 +225,6 @@ GameObject:
   - component: {fileID: 1592291028}
   - component: {fileID: 1592291027}
   - component: {fileID: 1592291029}
-  - component: {fileID: 1592291030}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -313,20 +312,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
---- !u!114 &1592291030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1592291026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d428c4a6cde920489f6caf149a5c0a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _target: {fileID: 1631615798}
-  _attackPower: 10
 --- !u!1 &1631615795
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,6 +427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 1592291029}
   _attackPower: 10
+  _playerInput: {fileID: 1631615800}
 --- !u!114 &1631615800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,7 +441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: cd533bde35afa6a499cefe1e38fb7ecf, type: 3}
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -517,7 +503,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAttack: {fileID: 1631615799}
-  enemyAttack: {fileID: 1592291030}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

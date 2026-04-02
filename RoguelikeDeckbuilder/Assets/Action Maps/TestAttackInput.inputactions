@@ -7,21 +7,12 @@
             "id": "ddedb3f1-7643-44d5-a916-e63d05663e51",
             "actions": [
                 {
-                    "name": "Player's Attack",
+                    "name": "PlayerAttack",
                     "type": "Button",
                     "id": "f408049e-c13f-4b48-aeeb-853e0a32f78c",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Enemy's Attack",
-                    "type": "Button",
-                    "id": "adff318e-1cbb-4b7b-a055-0f5ca3577031",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "Press",
+                    "interactions": "Press(pressPoint=0.5)",
                     "initialStateCheck": false
                 }
             ],
@@ -32,24 +23,30 @@
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Player's Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fe31a04f-dcef-45fa-a97b-07f196a88333",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Enemy's Attack",
+                    "groups": ";PC",
+                    "action": "PlayerAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "PC",
+            "bindingGroup": "PC",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
 }

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class UnitAttack : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class UnitAttack : MonoBehaviour
 	[SerializeField] private BattleUnitBase _target;
 	[Header("Status")]
 	[SerializeField] private int _attackPower = 10;
+	[SerializeField] private PlayerInput _playerInput;
 	//private variables
 	
 	//private components
@@ -18,9 +21,13 @@ public class UnitAttack : MonoBehaviour
 	//Unity Lifecycle
 	private void Awake()
 	{
-		
+
 	}
-	
+
+    private void OnEnable()
+    {
+		_playerInput.actions["PlayerAttack"].performed += OnAttack;
+    }
     private void Start()
     {
         
@@ -28,11 +35,21 @@ public class UnitAttack : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
-	
-	//region Public Methods
-	public void Attack()
+
+    private void OnDisable()
+    {
+
+    }
+
+	private void OnAttack(InputAction.CallbackContext context)
+	{
+		Attack();
+	}
+
+    //region Public Methods
+    public void Attack()
 	{
 		if(isActiveAndEnabled && _target.isActiveAndEnabled)
 			_target.TakeDamage(_attackPower);
@@ -40,5 +57,4 @@ public class UnitAttack : MonoBehaviour
 	//region Private Methods
 
 	//region Gizmos
-
 }

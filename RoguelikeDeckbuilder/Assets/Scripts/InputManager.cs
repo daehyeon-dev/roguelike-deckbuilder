@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,6 @@ public class InputManager : MonoBehaviour
 	//SerializeField
 	[Header("Components")]
 	[SerializeField] private UnitAttack playerAttack;
-	[SerializeField] private UnitAttack enemyAttack;
 	//private variables
 	
 	//private components
@@ -30,20 +30,16 @@ public class InputManager : MonoBehaviour
     {
         
     }
-	
+
 	//region Public Methods
-	public void OnPlayerAttack(InputAction.CallbackContext context)
+	public event Action OnPlayerAttack;
+
+	public void OnPlayerAttackInput(InputAction.CallbackContext context)
 	{
 		if (!context.performed) return;
-		playerAttack.Attack();
 
+		OnPlayerAttack?.Invoke();
 	}
-	public void OnEnemyAttack(InputAction.CallbackContext context)
-	{
-		if(!context.performed) return;
-		enemyAttack.Attack();
-	}
-	//region Private Methods
 
 	//region Gizmos
 

@@ -23,7 +23,7 @@ public class BattleUnitBase : MonoBehaviour
 	
     protected virtual void Start()
     {
-        
+
     }
 
     protected virtual void Update()
@@ -36,8 +36,8 @@ public class BattleUnitBase : MonoBehaviour
 	{
 		if (isDead)
 			return;
-		Debug.Log($"Get {damage} damage. Current HP is {_currentHealth}");
-		_currentHealth -= damage;
+        _currentHealth -= damage;
+        Debug.Log($"Get {damage} damage. Current HP is {_currentHealth}");
 		if (_currentHealth <= 0)
 			Dead();
 	}
@@ -45,8 +45,8 @@ public class BattleUnitBase : MonoBehaviour
 	{
 		if (isDead)
 			return;
-		Debug.Log($"Get {healAmount} recovery. Current HP is {_currentHealth}");
-		_currentHealth += healAmount;
+        _currentHealth += healAmount;
+        Debug.Log($"Get {healAmount} recovery. Current HP is {_currentHealth}");
 	}
 	public void Attack()
 	{
