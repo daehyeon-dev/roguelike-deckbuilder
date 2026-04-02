@@ -7,20 +7,42 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
 	//SerializeField
-	[Header("Components")]
-	[SerializeField] private UnitAttack playerAttack;
 	//private variables
-	
-	//private components
-	
-	//public property
-	
+    private static InputManager _instance;
+    private InputAction _attackInput;
+    private InputAction _eAttackInput;
+    //private components
+    private PlayerInput _playerInput;
+    //Events
+    public event Action OnAttackPressed;
+    public event Action OnEAttackPressed;
+    //public property
+    public static InputManager Instance { get; private set; }
 	//Unity Lifecycle
 	private void Awake()
 	{
-		
-	}
-	
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        if(_playerInput == null)
+        {
+            _playerInput = GetComponent<PlayerInput>();
+        }
+        _attackInput = _playerInput.actions["Attack"];
+        _eAttackInput = _playerInput.actions["EAttack"];
+    }
+
+    private void OnEnable()
+    {
+		_attackInput.performed += HandleAttack;
+        _eAttackInput.performed += HandleEAttack;
+    }
+
     private void Start()
     {
         
@@ -31,15 +53,22 @@ public class InputManager : MonoBehaviour
         
     }
 
-	//region Public Methods
-	public event Action OnPlayerAttack;
+	private void OnDisable()
+    {
+        _attackInput.performed -= HandleAttack;
+        _eAttackInput.performed -= HandleEAttack;
+    }
 
-	public void OnPlayerAttackInput(InputAction.CallbackContext context)
+    //region Public Methods
+    public void HandleAttack(InputAction.CallbackContext context)
 	{
-		if (!context.performed) return;
-
-		OnPlayerAttack?.Invoke();
+        OnAttackPressed?.Invoke();
 	}
+
+    public void HandleEAttack(InputAction.CallbackContext context)
+    {
+        OnEAttackPressed?.Invoke();
+    }
 
 	//region Gizmos
 

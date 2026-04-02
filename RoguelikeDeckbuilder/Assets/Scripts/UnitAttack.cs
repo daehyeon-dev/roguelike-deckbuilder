@@ -7,11 +7,8 @@ using UnityEngine.InputSystem;
 public class UnitAttack : MonoBehaviour
 {
 	//SerializeField
-	[Header("Attack Target")]
-	[SerializeField] private BattleUnitBase _target;
 	[Header("Status")]
 	[SerializeField] private int _attackPower = 10;
-	[SerializeField] private PlayerInput _playerInput;
 	//private variables
 	
 	//private components
@@ -26,7 +23,7 @@ public class UnitAttack : MonoBehaviour
 
     private void OnEnable()
     {
-		_playerInput.actions["PlayerAttack"].performed += OnAttack;
+
     }
     private void Start()
     {
@@ -43,16 +40,10 @@ public class UnitAttack : MonoBehaviour
 
     }
 
-	private void OnAttack(InputAction.CallbackContext context)
-	{
-		Attack();
-	}
-
     //region Public Methods
-    public void Attack()
+    public void Attack(BattleUnitBase attackTarget)
 	{
-		if(isActiveAndEnabled && _target.isActiveAndEnabled)
-			_target.TakeDamage(_attackPower);
+		attackTarget.TakeDamage(_attackPower);
 	}
 	//region Private Methods
 

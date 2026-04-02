@@ -93,12 +93,21 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
             ""id"": ""ddedb3f1-7643-44d5-a916-e63d05663e51"",
             ""actions"": [
                 {
-                    ""name"": ""PlayerAttack"",
+                    ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""f408049e-c13f-4b48-aeeb-853e0a32f78c"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": ""Press(pressPoint=0.5)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""13e6fe88-3e9d-4e00-ade9-370bfddf0272"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 }
             ],
@@ -110,7 +119,18 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";PC"",
-                    ""action"": ""PlayerAttack"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""abf558bc-2400-4344-a303-6221ffa8039a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -138,7 +158,8 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
 }");
         // TestAttack
         m_TestAttack = asset.FindActionMap("TestAttack", throwIfNotFound: true);
-        m_TestAttack_PlayerAttack = m_TestAttack.FindAction("PlayerAttack", throwIfNotFound: true);
+        m_TestAttack_Attack = m_TestAttack.FindAction("Attack", throwIfNotFound: true);
+        m_TestAttack_EAttack = m_TestAttack.FindAction("EAttack", throwIfNotFound: true);
     }
 
     ~@TestAttackInput()
@@ -219,7 +240,8 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
     // TestAttack
     private readonly InputActionMap m_TestAttack;
     private List<ITestAttackActions> m_TestAttackActionsCallbackInterfaces = new List<ITestAttackActions>();
-    private readonly InputAction m_TestAttack_PlayerAttack;
+    private readonly InputAction m_TestAttack_Attack;
+    private readonly InputAction m_TestAttack_EAttack;
     /// <summary>
     /// Provides access to input actions defined in input action map "TestAttack".
     /// </summary>
@@ -232,9 +254,13 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
         /// </summary>
         public TestAttackActions(@TestAttackInput wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "TestAttack/PlayerAttack".
+        /// Provides access to the underlying input action "TestAttack/Attack".
         /// </summary>
-        public InputAction @PlayerAttack => m_Wrapper.m_TestAttack_PlayerAttack;
+        public InputAction @Attack => m_Wrapper.m_TestAttack_Attack;
+        /// <summary>
+        /// Provides access to the underlying input action "TestAttack/EAttack".
+        /// </summary>
+        public InputAction @EAttack => m_Wrapper.m_TestAttack_EAttack;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -261,9 +287,12 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_TestAttackActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_TestAttackActionsCallbackInterfaces.Add(instance);
-            @PlayerAttack.started += instance.OnPlayerAttack;
-            @PlayerAttack.performed += instance.OnPlayerAttack;
-            @PlayerAttack.canceled += instance.OnPlayerAttack;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
+            @EAttack.started += instance.OnEAttack;
+            @EAttack.performed += instance.OnEAttack;
+            @EAttack.canceled += instance.OnEAttack;
         }
 
         /// <summary>
@@ -275,9 +304,12 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
         /// <seealso cref="TestAttackActions" />
         private void UnregisterCallbacks(ITestAttackActions instance)
         {
-            @PlayerAttack.started -= instance.OnPlayerAttack;
-            @PlayerAttack.performed -= instance.OnPlayerAttack;
-            @PlayerAttack.canceled -= instance.OnPlayerAttack;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
+            @EAttack.started -= instance.OnEAttack;
+            @EAttack.performed -= instance.OnEAttack;
+            @EAttack.canceled -= instance.OnEAttack;
         }
 
         /// <summary>
@@ -332,11 +364,18 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
     public interface ITestAttackActions
     {
         /// <summary>
-        /// Method invoked when associated input action "PlayerAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Attack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnPlayerAttack(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "EAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEAttack(InputAction.CallbackContext context);
     }
 }

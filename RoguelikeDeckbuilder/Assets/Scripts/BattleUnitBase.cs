@@ -10,11 +10,12 @@ public class BattleUnitBase : MonoBehaviour
 	[SerializeField] private int _maxHealth = 100;
 	//private variables
 	private int _currentHealth;
-	private bool isDead = false;
+	private bool _isDead = false;
 	//private components
 	
 	//public property
 	public int CurrentHealth => _currentHealth;
+	public bool IsDead => _isDead;
 	//Unity Lifecycle
 	protected virtual void Awake()
 	{
@@ -34,7 +35,7 @@ public class BattleUnitBase : MonoBehaviour
 	//region Public Methods
 	public void TakeDamage(int damage)
 	{
-		if (isDead)
+		if (_isDead)
 			return;
         _currentHealth -= damage;
         Debug.Log($"Get {damage} damage. Current HP is {_currentHealth}");
@@ -43,21 +44,18 @@ public class BattleUnitBase : MonoBehaviour
 	}
 	public void Heal(int healAmount)
 	{
-		if (isDead)
+		if (_isDead)
 			return;
-        _currentHealth += healAmount;
+        _currentHealth = Math.Min(_maxHealth, healAmount+_currentHealth);
         Debug.Log($"Get {healAmount} recovery. Current HP is {_currentHealth}");
-	}
-	public void Attack()
-	{
-
 	}
 	//region Private Methods
 	private void Dead()
 	{
-		if (isDead)
+		if (_isDead)
 			return;
         Debug.Log($"{gameObject.name} is Dead");
+		_isDead = true;
 		gameObject.SetActive(false);
 	}
 	//region Gizmos

@@ -214,6 +214,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &43752428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 43752431}
+  - component: {fileID: 43752430}
+  - component: {fileID: 43752429}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &43752429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43752428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4dc93e5ddcffe84a9448608a8b0882c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerUnit: {fileID: 1631615798}
+  _playerUnitAttack: {fileID: 1631615802}
+  _enemyUnit: {fileID: 1592291029}
+  _enemyUnitAttack: {fileID: 1592291030}
+--- !u!114 &43752430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43752428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33de49cb539d04c419c292238a34ddc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &43752431
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43752428}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1592291026
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,6 +286,7 @@ GameObject:
   - component: {fileID: 1592291028}
   - component: {fileID: 1592291027}
   - component: {fileID: 1592291029}
+  - component: {fileID: 1592291030}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -312,6 +374,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+--- !u!114 &1592291030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592291026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d428c4a6cde920489f6caf149a5c0a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackPower: 10
 --- !u!1 &1631615795
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,8 +399,8 @@ GameObject:
   - component: {fileID: 1631615796}
   - component: {fileID: 1631615798}
   - component: {fileID: 1631615800}
-  - component: {fileID: 1631615799}
   - component: {fileID: 1631615801}
+  - component: {fileID: 1631615802}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -413,21 +488,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
---- !u!114 &1631615799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1631615795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d428c4a6cde920489f6caf149a5c0a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _target: {fileID: 1592291029}
-  _attackPower: 10
-  _playerInput: {fileID: 1631615800}
 --- !u!114 &1631615800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,11 +562,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9959d45a28c605048beca57036bd1b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAttack: {fileID: 1631615799}
+--- !u!114 &1631615802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631615795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d428c4a6cde920489f6caf149a5c0a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackPower: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 5496610}
+  - {fileID: 43752431}
   - {fileID: 1631615797}
   - {fileID: 1592291028}
