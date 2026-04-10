@@ -38,7 +38,7 @@ public class BattleUnitBase : MonoBehaviour
 		if (_isDead)
 			return;
         _currentHealth -= damage;
-        Debug.Log($"Get {damage} damage. Current HP is {_currentHealth}");
+        Debug.Log($"{gameObject.name} Get {damage} damage. Current HP is {_currentHealth}");
 		if (_currentHealth <= 0)
 			Dead();
 	}
@@ -47,7 +47,7 @@ public class BattleUnitBase : MonoBehaviour
 		if (_isDead)
 			return;
         _currentHealth = Math.Min(_maxHealth, healAmount+_currentHealth);
-        Debug.Log($"Get {healAmount} recovery. Current HP is {_currentHealth}");
+        Debug.Log($"{gameObject.name} Get {healAmount} recovery. Current HP is {_currentHealth}");
 	}
 	//region Private Methods
 	private void Dead()
