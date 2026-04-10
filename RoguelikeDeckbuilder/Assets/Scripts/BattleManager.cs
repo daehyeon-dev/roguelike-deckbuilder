@@ -46,7 +46,8 @@ public class BattleManager : MonoBehaviour
     private void OnEnable()
     {
         InputManager.Instance.OnCardSlot1Pressed += () => UseCard(0);
-        //InputManager.Instance.OnEAttackPressed += EnemyAttack;
+        InputManager.Instance.OnCardSlot2Pressed += () => UseCard(1);
+		InputManager.Instance.OnCardSlot3Pressed += () => UseCard(2);
     }
 
     private void Start()
@@ -78,6 +79,18 @@ public class BattleManager : MonoBehaviour
 			{
 				StartEnemyTurn();
             }
+		}
+	}
+	
+	private void PlayerHeal(int healAmount)
+	{
+		if (CurrentTurn != BattleTurnState.PlayerTurn)
+			return;
+		if(!_playerUnit.IsDead)
+		{
+			CurrentTurn = BattleTurnState.Busy;
+			_playerUnit.Heal(healAmount);
+			StartEnemyTurn() ;
 		}
 	}
 
@@ -119,7 +132,6 @@ public class BattleManager : MonoBehaviour
 
 	private IEnumerator EnemyTurnRoutine()
 	{
-		Debug.Log("Enemy Turn Coroutine is Started");
 		yield return new WaitForSeconds(3);
         _enemyUnitAttack.Attack(_playerUnit);
         if (_playerUnit.IsDead)
@@ -143,6 +155,12 @@ public class BattleManager : MonoBehaviour
 		{
 			PlayerAttack(card.damage);
 		}
+
+		if(card.healAmount > 0)
+		{
+			PlayerHeal(card.healAmount);
+
+        }
 	}
 
 	//region Gizmos

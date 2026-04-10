@@ -251,6 +251,8 @@ MonoBehaviour:
   _enemyUnitAttack: {fileID: 1592291030}
   hand:
   - {fileID: 11400000, guid: e965da71cbf0aac41a3e0e39eb18c37c, type: 2}
+  - {fileID: 11400000, guid: 7e1c396aa98d895448beb2a98366440a, type: 2}
+  - {fileID: 11400000, guid: f447a1e64a8b4d24385de1bb7668450e, type: 2}
 --- !u!114 &43752430
 MonoBehaviour:
   m_ObjectHideFlags: 0

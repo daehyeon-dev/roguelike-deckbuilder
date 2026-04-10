@@ -7,12 +7,30 @@
             "id": "ddedb3f1-7643-44d5-a916-e63d05663e51",
             "actions": [
                 {
-                    "name": "CardUse",
+                    "name": "FirstCardUse",
                     "type": "Button",
                     "id": "f408049e-c13f-4b48-aeeb-853e0a32f78c",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Press(pressPoint=0.5)",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SecondCardUse",
+                    "type": "Button",
+                    "id": "f948836b-3bb8-417d-9b69-62c9ce2ba03e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ThirdCardUse",
+                    "type": "Button",
+                    "id": "5ede25b7-8a95-4062-bf55-a5b65b9a1368",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 }
             ],
@@ -24,7 +42,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";PC",
-                    "action": "CardUse",
+                    "action": "FirstCardUse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "db9efdd5-1045-46ab-a411-d8490e16b782",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SecondCardUse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2b995206-640e-4ad5-ab31-97e1addc3073",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThirdCardUse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

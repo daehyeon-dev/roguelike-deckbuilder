@@ -93,12 +93,30 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
             ""id"": ""ddedb3f1-7643-44d5-a916-e63d05663e51"",
             ""actions"": [
                 {
-                    ""name"": ""CardUse"",
+                    ""name"": ""FirstCardUse"",
                     ""type"": ""Button"",
                     ""id"": ""f408049e-c13f-4b48-aeeb-853e0a32f78c"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Press(pressPoint=0.5)"",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SecondCardUse"",
+                    ""type"": ""Button"",
+                    ""id"": ""f948836b-3bb8-417d-9b69-62c9ce2ba03e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThirdCardUse"",
+                    ""type"": ""Button"",
+                    ""id"": ""5ede25b7-8a95-4062-bf55-a5b65b9a1368"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -110,7 +128,29 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";PC"",
-                    ""action"": ""CardUse"",
+                    ""action"": ""FirstCardUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""db9efdd5-1045-46ab-a411-d8490e16b782"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondCardUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2b995206-640e-4ad5-ab31-97e1addc3073"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThirdCardUse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -138,7 +178,9 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
 }");
         // TestAttack
         m_TestAttack = asset.FindActionMap("TestAttack", throwIfNotFound: true);
-        m_TestAttack_CardUse = m_TestAttack.FindAction("CardUse", throwIfNotFound: true);
+        m_TestAttack_FirstCardUse = m_TestAttack.FindAction("FirstCardUse", throwIfNotFound: true);
+        m_TestAttack_SecondCardUse = m_TestAttack.FindAction("SecondCardUse", throwIfNotFound: true);
+        m_TestAttack_ThirdCardUse = m_TestAttack.FindAction("ThirdCardUse", throwIfNotFound: true);
     }
 
     ~@TestAttackInput()
@@ -219,7 +261,9 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
     // TestAttack
     private readonly InputActionMap m_TestAttack;
     private List<ITestAttackActions> m_TestAttackActionsCallbackInterfaces = new List<ITestAttackActions>();
-    private readonly InputAction m_TestAttack_CardUse;
+    private readonly InputAction m_TestAttack_FirstCardUse;
+    private readonly InputAction m_TestAttack_SecondCardUse;
+    private readonly InputAction m_TestAttack_ThirdCardUse;
     /// <summary>
     /// Provides access to input actions defined in input action map "TestAttack".
     /// </summary>
@@ -232,9 +276,17 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
         /// </summary>
         public TestAttackActions(@TestAttackInput wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "TestAttack/CardUse".
+        /// Provides access to the underlying input action "TestAttack/FirstCardUse".
         /// </summary>
-        public InputAction @CardUse => m_Wrapper.m_TestAttack_CardUse;
+        public InputAction @FirstCardUse => m_Wrapper.m_TestAttack_FirstCardUse;
+        /// <summary>
+        /// Provides access to the underlying input action "TestAttack/SecondCardUse".
+        /// </summary>
+        public InputAction @SecondCardUse => m_Wrapper.m_TestAttack_SecondCardUse;
+        /// <summary>
+        /// Provides access to the underlying input action "TestAttack/ThirdCardUse".
+        /// </summary>
+        public InputAction @ThirdCardUse => m_Wrapper.m_TestAttack_ThirdCardUse;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -261,9 +313,15 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_TestAttackActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_TestAttackActionsCallbackInterfaces.Add(instance);
-            @CardUse.started += instance.OnCardUse;
-            @CardUse.performed += instance.OnCardUse;
-            @CardUse.canceled += instance.OnCardUse;
+            @FirstCardUse.started += instance.OnFirstCardUse;
+            @FirstCardUse.performed += instance.OnFirstCardUse;
+            @FirstCardUse.canceled += instance.OnFirstCardUse;
+            @SecondCardUse.started += instance.OnSecondCardUse;
+            @SecondCardUse.performed += instance.OnSecondCardUse;
+            @SecondCardUse.canceled += instance.OnSecondCardUse;
+            @ThirdCardUse.started += instance.OnThirdCardUse;
+            @ThirdCardUse.performed += instance.OnThirdCardUse;
+            @ThirdCardUse.canceled += instance.OnThirdCardUse;
         }
 
         /// <summary>
@@ -275,9 +333,15 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
         /// <seealso cref="TestAttackActions" />
         private void UnregisterCallbacks(ITestAttackActions instance)
         {
-            @CardUse.started -= instance.OnCardUse;
-            @CardUse.performed -= instance.OnCardUse;
-            @CardUse.canceled -= instance.OnCardUse;
+            @FirstCardUse.started -= instance.OnFirstCardUse;
+            @FirstCardUse.performed -= instance.OnFirstCardUse;
+            @FirstCardUse.canceled -= instance.OnFirstCardUse;
+            @SecondCardUse.started -= instance.OnSecondCardUse;
+            @SecondCardUse.performed -= instance.OnSecondCardUse;
+            @SecondCardUse.canceled -= instance.OnSecondCardUse;
+            @ThirdCardUse.started -= instance.OnThirdCardUse;
+            @ThirdCardUse.performed -= instance.OnThirdCardUse;
+            @ThirdCardUse.canceled -= instance.OnThirdCardUse;
         }
 
         /// <summary>
@@ -332,11 +396,25 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
     public interface ITestAttackActions
     {
         /// <summary>
-        /// Method invoked when associated input action "CardUse" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "FirstCardUse" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnCardUse(InputAction.CallbackContext context);
+        void OnFirstCardUse(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SecondCardUse" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSecondCardUse(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ThirdCardUse" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnThirdCardUse(InputAction.CallbackContext context);
     }
 }
