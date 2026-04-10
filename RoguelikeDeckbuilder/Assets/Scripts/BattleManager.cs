@@ -44,7 +44,7 @@ public class BattleManager : MonoBehaviour
     private void OnEnable()
     {
         InputManager.Instance.OnAttackPressed += PlayerAttack;
-        InputManager.Instance.OnEAttackPressed += EnemyAttack;
+        //InputManager.Instance.OnEAttackPressed += EnemyAttack;
     }
 
     private void Start()
@@ -70,33 +70,65 @@ public class BattleManager : MonoBehaviour
 			_playerUnitAttack.Attack(_enemyUnit);
 			if (_enemyUnit.IsDead)
 			{
-				CurrentTurn = BattleTurnState.BattleEnd;
-			}
+				TurnEnd();
+            }
 			else
 			{
-                CurrentTurn = BattleTurnState.EnemyTurn;
+				StartEnemyTurn();
             }
 		}			
 	}
 
-	private void EnemyAttack()
+	private void EnemyAttackRoutine()
 	{
 		if (CurrentTurn != BattleTurnState.EnemyTurn)
 			return;
         if (!_playerUnit.IsDead && !_enemyUnit.IsDead)
 		{
 			CurrentTurn = BattleTurnState.Busy;
-            _enemyUnitAttack.Attack(_playerUnit);
-			if (_playerUnit.IsDead)
-			{
-				CurrentTurn = BattleTurnState.BattleEnd;
-			}
-			else
-			{
-                CurrentTurn = BattleTurnState.PlayerTurn;
-            }
+			StartCoroutine(EnemyTurnRoutine());
         }
 	}
+
+	private void StartPlayerTurn()
+	{
+		if(CurrentTurn != BattleTurnState.PlayerTurn)
+		{
+			CurrentTurn = BattleTurnState.PlayerTurn;
+		}
+	}
+
+	private void StartEnemyTurn()
+	{
+		if(CurrentTurn != BattleTurnState.EnemyTurn)
+		{
+			CurrentTurn = BattleTurnState.EnemyTurn;
+            EnemyAttackRoutine();
+        }
+	}
+
+	private void TurnEnd()
+	{
+		if(CurrentTurn != BattleTurnState.BattleEnd)
+		{
+			CurrentTurn = BattleTurnState.BattleEnd;
+		}
+	}
+
+	private IEnumerator EnemyTurnRoutine()
+	{
+		Debug.Log("Enemy Turn Coroutine is Started");
+		yield return new WaitForSeconds(3);
+        _enemyUnitAttack.Attack(_playerUnit);
+        if (_playerUnit.IsDead)
+        {
+            TurnEnd();
+        }
+        else
+        {
+            StartPlayerTurn();
+        }
+    }
 
 	//region Gizmos
 

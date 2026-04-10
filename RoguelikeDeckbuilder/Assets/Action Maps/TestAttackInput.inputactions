@@ -14,15 +14,6 @@
                     "processors": "",
                     "interactions": "Press(pressPoint=0.5)",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "EAttack",
-                    "type": "Button",
-                    "id": "13e6fe88-3e9d-4e00-ade9-370bfddf0272",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -34,17 +25,6 @@
                     "processors": "",
                     "groups": ";PC",
                     "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "abf558bc-2400-4344-a303-6221ffa8039a",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "EAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
