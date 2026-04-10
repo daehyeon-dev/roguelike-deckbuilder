@@ -68,7 +68,14 @@ public class BattleManager : MonoBehaviour
 		{
 			CurrentTurn = BattleTurnState.Busy;
 			_playerUnitAttack.Attack(_enemyUnit);
-			CurrentTurn = BattleTurnState.EnemyTurn;
+			if (_enemyUnit.IsDead)
+			{
+				CurrentTurn = BattleTurnState.BattleEnd;
+			}
+			else
+			{
+                CurrentTurn = BattleTurnState.EnemyTurn;
+            }
 		}			
 	}
 
@@ -80,7 +87,14 @@ public class BattleManager : MonoBehaviour
 		{
 			CurrentTurn = BattleTurnState.Busy;
             _enemyUnitAttack.Attack(_playerUnit);
-			CurrentTurn = BattleTurnState.PlayerTurn;
+			if (_playerUnit.IsDead)
+			{
+				CurrentTurn = BattleTurnState.BattleEnd;
+			}
+			else
+			{
+                CurrentTurn = BattleTurnState.PlayerTurn;
+            }
         }
 	}
 
