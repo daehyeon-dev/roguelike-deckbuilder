@@ -41,7 +41,12 @@ public class UnitAttack : MonoBehaviour
     }
 
     //region Public Methods
-    public void Attack(BattleUnitBase attackTarget)
+    public void Attack(BattleUnitBase attackTarget, int damage)
+	{
+		attackTarget.TakeDamage(damage);
+	}
+
+	public void Attack(BattleUnitBase attackTarget)
 	{
 		attackTarget.TakeDamage(_attackPower);
 	}

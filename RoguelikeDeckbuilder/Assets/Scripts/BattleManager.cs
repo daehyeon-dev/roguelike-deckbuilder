@@ -22,6 +22,7 @@ public class BattleManager : MonoBehaviour
 	[SerializeField] private UnitAttack _enemyUnitAttack;
 	[Header("UI")]
 	[SerializeField] private TMP_Text _textMeshPro;
+	[SerializeField] private List<CardData> hand = new List<CardData>();
 	//private variables
 	private BattleTurnState _currentTurn;
 	//private components
@@ -43,7 +44,7 @@ public class BattleManager : MonoBehaviour
 
     private void OnEnable()
     {
-        InputManager.Instance.OnAttackPressed += PlayerAttack;
+        InputManager.Instance.OnCardSlot1Pressed += () => UseCard(0);
         //InputManager.Instance.OnEAttackPressed += EnemyAttack;
     }
 
@@ -60,14 +61,14 @@ public class BattleManager : MonoBehaviour
 	//region Public Methods
 
 	//region Private Methods
-	private void PlayerAttack()
+	private void PlayerAttack(int damage)
 	{
 		if (CurrentTurn != BattleTurnState.PlayerTurn)
 			return;
 		if (!_playerUnit.IsDead && !_enemyUnit.IsDead)
 		{
 			CurrentTurn = BattleTurnState.Busy;
-			_playerUnitAttack.Attack(_enemyUnit);
+			_playerUnitAttack.Attack(_enemyUnit, damage);
 			if (_enemyUnit.IsDead)
 			{
 				TurnEnd();
@@ -76,7 +77,7 @@ public class BattleManager : MonoBehaviour
 			{
 				StartEnemyTurn();
             }
-		}			
+		}
 	}
 
 	private void EnemyAttackRoutine()
@@ -129,6 +130,19 @@ public class BattleManager : MonoBehaviour
             StartPlayerTurn();
         }
     }
+
+	private void UseCard(int index)
+	{
+		if (index >= hand.Count)
+			return;
+
+		var card = hand[index];
+
+		if(card.damage > 0)
+		{
+			PlayerAttack(card.damage);
+		}
+	}
 
 	//region Gizmos
 

@@ -93,7 +93,7 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
             ""id"": ""ddedb3f1-7643-44d5-a916-e63d05663e51"",
             ""actions"": [
                 {
-                    ""name"": ""Attack"",
+                    ""name"": ""CardUse"",
                     ""type"": ""Button"",
                     ""id"": ""f408049e-c13f-4b48-aeeb-853e0a32f78c"",
                     ""expectedControlType"": """",
@@ -110,7 +110,7 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";PC"",
-                    ""action"": ""Attack"",
+                    ""action"": ""CardUse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -138,7 +138,7 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
 }");
         // TestAttack
         m_TestAttack = asset.FindActionMap("TestAttack", throwIfNotFound: true);
-        m_TestAttack_Attack = m_TestAttack.FindAction("Attack", throwIfNotFound: true);
+        m_TestAttack_CardUse = m_TestAttack.FindAction("CardUse", throwIfNotFound: true);
     }
 
     ~@TestAttackInput()
@@ -219,7 +219,7 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
     // TestAttack
     private readonly InputActionMap m_TestAttack;
     private List<ITestAttackActions> m_TestAttackActionsCallbackInterfaces = new List<ITestAttackActions>();
-    private readonly InputAction m_TestAttack_Attack;
+    private readonly InputAction m_TestAttack_CardUse;
     /// <summary>
     /// Provides access to input actions defined in input action map "TestAttack".
     /// </summary>
@@ -232,9 +232,9 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
         /// </summary>
         public TestAttackActions(@TestAttackInput wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "TestAttack/Attack".
+        /// Provides access to the underlying input action "TestAttack/CardUse".
         /// </summary>
-        public InputAction @Attack => m_Wrapper.m_TestAttack_Attack;
+        public InputAction @CardUse => m_Wrapper.m_TestAttack_CardUse;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -261,9 +261,9 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_TestAttackActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_TestAttackActionsCallbackInterfaces.Add(instance);
-            @Attack.started += instance.OnAttack;
-            @Attack.performed += instance.OnAttack;
-            @Attack.canceled += instance.OnAttack;
+            @CardUse.started += instance.OnCardUse;
+            @CardUse.performed += instance.OnCardUse;
+            @CardUse.canceled += instance.OnCardUse;
         }
 
         /// <summary>
@@ -275,9 +275,9 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
         /// <seealso cref="TestAttackActions" />
         private void UnregisterCallbacks(ITestAttackActions instance)
         {
-            @Attack.started -= instance.OnAttack;
-            @Attack.performed -= instance.OnAttack;
-            @Attack.canceled -= instance.OnAttack;
+            @CardUse.started -= instance.OnCardUse;
+            @CardUse.performed -= instance.OnCardUse;
+            @CardUse.canceled -= instance.OnCardUse;
         }
 
         /// <summary>
@@ -332,11 +332,11 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
     public interface ITestAttackActions
     {
         /// <summary>
-        /// Method invoked when associated input action "Attack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "CardUse" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnAttack(InputAction.CallbackContext context);
+        void OnCardUse(InputAction.CallbackContext context);
     }
 }

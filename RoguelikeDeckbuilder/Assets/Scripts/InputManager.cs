@@ -9,13 +9,12 @@ public class InputManager : MonoBehaviour
 	//SerializeField
 	//private variables
     private static InputManager _instance;
-    private InputAction _attackInput;
+    private InputAction _cardInput;
     //private InputAction _eAttackInput;
     //private components
     private PlayerInput _playerInput;
     //Events
-    public event Action OnAttackPressed;
-    //public event Action OnEAttackPressed;
+    public event Action OnCardSlot1Pressed;
     //public property
     public static InputManager Instance { get; private set; }
 	//Unity Lifecycle
@@ -33,14 +32,12 @@ public class InputManager : MonoBehaviour
         {
             _playerInput = GetComponent<PlayerInput>();
         }
-        _attackInput = _playerInput.actions["Attack"];
-        //_eAttackInput = _playerInput.actions["EAttack"];
+        _cardInput = _playerInput.actions["CardUse"];
     }
 
     private void OnEnable()
     {
-		_attackInput.performed += HandleAttack;
-        //_eAttackInput.performed += HandleEAttack;
+		_cardInput.performed += HandleAttack;
     }
 
     private void Start()
@@ -55,20 +52,14 @@ public class InputManager : MonoBehaviour
 
 	private void OnDisable()
     {
-        _attackInput.performed -= HandleAttack;
-        //_eAttackInput.performed -= HandleEAttack;
+        _cardInput.performed -= HandleAttack;
     }
 
     //region Public Methods
     public void HandleAttack(InputAction.CallbackContext context)
 	{
-        OnAttackPressed?.Invoke();
+        OnCardSlot1Pressed?.Invoke();
 	}
-
-    //public void HandleEAttack(InputAction.CallbackContext context)
-    //{
-    //    OnEAttackPressed?.Invoke();
-    //}
 
 	//region Gizmos
 
