@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -21,19 +22,19 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private BattleUnitBase _enemyUnit;
 	[SerializeField] private UnitAttack _enemyUnitAttack;
 	[Header("UI")]
-	[SerializeField] private TMP_Text _textMeshPro;
 	[SerializeField] private List<CardData> hand = new List<CardData>();
 	//private variables
 	private BattleTurnState _currentTurn;
 	//private components
 
+	//Events
+	public event Action OnTurnChanged;
 	//public property
 	public BattleTurnState CurrentTurn
 	{
 		get { return _currentTurn; }
 		set { _currentTurn = value;
-			Debug.Log($"{_currentTurn}");
-			_textMeshPro.text = _currentTurn.ToString();
+			OnTurnChanged?.Invoke();
 		}
 	}
 	//Unity Lifecycle

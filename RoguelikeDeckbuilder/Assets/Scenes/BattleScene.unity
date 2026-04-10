@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 43752431}
   - component: {fileID: 43752430}
   - component: {fileID: 43752429}
+  - component: {fileID: 43752432}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -248,7 +249,6 @@ MonoBehaviour:
   _playerUnitAttack: {fileID: 1631615802}
   _enemyUnit: {fileID: 1592291029}
   _enemyUnitAttack: {fileID: 1592291030}
-  _textMeshPro: {fileID: 1601759097}
   hand:
   - {fileID: 11400000, guid: e965da71cbf0aac41a3e0e39eb18c37c, type: 2}
 --- !u!114 &43752430
@@ -278,6 +278,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &43752432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43752428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba5f031c10c4a240826ba257240c9af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _battleManager: {fileID: 43752429}
+  _turnText: {fileID: 1601759097}
 --- !u!1 &1382936052
 GameObject:
   m_ObjectHideFlags: 0
