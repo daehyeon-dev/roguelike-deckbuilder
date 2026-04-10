@@ -56,7 +56,9 @@ public class InputManager : MonoBehaviour
     }
 
     //region Public Methods
-    public void HandleAttack(InputAction.CallbackContext context)
+
+    //region Private Methods
+    private void HandleAttack(InputAction.CallbackContext context)
 	{
         OnCardSlot1Pressed?.Invoke();
 	}
