@@ -17,3 +17,5 @@ MonoBehaviour:
   damage: 0
   healAmount: 10
   blockAmount: 0
+  drawAmount: 0
+  explain: "\uC790\uC2E0\uC758 HP\uB97C 10 \uD68C\uBCF5"

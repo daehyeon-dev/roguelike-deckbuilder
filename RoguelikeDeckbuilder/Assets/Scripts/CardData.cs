@@ -11,4 +11,5 @@ public class CardData : ScriptableObject
 	public int healAmount;
 	public int blockAmount;
 	public int drawAmount;
+	public string explain;
 }

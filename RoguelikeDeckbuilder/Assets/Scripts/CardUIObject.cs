@@ -64,15 +64,7 @@ public class CardUIObject : MonoBehaviour, IPointerClickHandler
     //region Private Methods
     private void DrawCardUI()
 	{
-		_cardText.text = $"{_cardData.name}\nCost: {_cardData.cost}";
-		if(_cardData.damage > 0)
-		{
-			_cardText.text += $"\nDeal {_cardData.damage} Damage";
-		}
-		if(_cardData.healAmount > 0)
-		{
-			_cardText.text += $"\nHeal {_cardData.healAmount} Self";
-		}
+		_cardText.text = $"{_cardData.name}\nCost: {_cardData.cost}\n{_cardData.explain}";
 	}
 
     //region Gizmos

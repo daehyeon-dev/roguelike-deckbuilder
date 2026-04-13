@@ -56,12 +56,12 @@ public class BattleManager : MonoBehaviour
 
     private void Start()
     {
-		RefreshHandUI();
         CurrentTurn = BattleTurnState.PlayerTurn;
 		foreach(var handCard in handUI)
 		{
 			handCard.OnCardClicked += UseCard;
 		}
+		DrawHandCard();
     }
 
     private void Update()
@@ -146,7 +146,7 @@ public class BattleManager : MonoBehaviour
         if (CurrentTurn != BattleTurnState.PlayerTurn)
             return;
 
-        var card = _cardManager.GetHandCard(index);
+        var card = _cardManager.TakeHandCard(index);
 
 		if(card == null)
 		{
@@ -170,7 +170,7 @@ public class BattleManager : MonoBehaviour
 			DrawCard(card.drawAmount);
 		}
 
-		Discard(index);
+		Discard(card);
 
         if (_enemyUnit.IsDead)
         {
@@ -199,9 +199,15 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-	private void Discard(int index)
+	//private void Discard(int index)
+	//{
+	//	_cardManager.DiscardFromHand(index);
+	//	RefreshHandUI();
+	//}
+
+	private void Discard(CardData cardData)
 	{
-		_cardManager.DiscardFromHand(index);
+		_cardManager.DiscardCard(cardData);
 		RefreshHandUI();
 	}
 

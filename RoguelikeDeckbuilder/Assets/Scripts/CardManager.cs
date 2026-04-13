@@ -41,13 +41,33 @@ public class CardManager : MonoBehaviour
         if (index >= _handCardList.Count || _handCardList[index] == null)
             return null;
         else
-            return _handCardList[index];
+        {
+            var card = _handCardList[index];
+            return card;
+        }
+    }
+
+    public CardData TakeHandCard(int index)
+    {
+        if (index >= _handCardList.Count || _handCardList[index] == null)
+            return null;
+        else
+        {
+            var card = _handCardList[index];
+            _handCardList.RemoveAt(index);
+            return card;
+        }
     }
 
     public void DiscardFromHand(int index)
     {
         _discardCardList.Add(_handCardList[index]);
         _handCardList.RemoveAt(index);
+    }
+
+    public void DiscardCard(CardData card)
+    {
+        _discardCardList.Add(card);
     }
 
     public void DrawCards(int count)
