@@ -165,6 +165,11 @@ public class BattleManager : MonoBehaviour
 			PlayerHeal(card.healAmount);
         }
 
+		if(card.drawAmount > 0)
+		{
+			DrawCard(card.drawAmount);
+		}
+
 		Discard(index);
 
         if (_enemyUnit.IsDead)
@@ -200,9 +205,9 @@ public class BattleManager : MonoBehaviour
 		RefreshHandUI();
 	}
 
-	private void DrawCard()
+	private void DrawCard(int count)
 	{
-		_cardManager.DrawCard();
+		_cardManager.DrawCards(count);
 		RefreshHandUI() ;
 	}
 

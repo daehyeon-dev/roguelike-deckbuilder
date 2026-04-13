@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
-    const int initHandCount = 3;
-    const int handLimit = 3;
+    private const int initHandCount = 3;
+    private const int handLimit = 5;
     //SerializeField
     [Header("CardList")]
     [SerializeField] private List<CardData> _handCardList = new List<CardData>();
@@ -57,13 +57,21 @@ public class CardManager : MonoBehaviour
             DrawCard();
         }
     }
-    public void DrawCard()
+
+    public void DrawHandCard()
     {
-        if(_handCardList.Count >= handLimit)
+        int count = initHandCount - _handCardList.Count;
+        if(count > 0)
+            DrawCards(count);
+    }
+    //region Private Methods
+    private void DrawCard()
+    {
+        if (_handCardList.Count >= handLimit)
         {
             return;
         }
-        if(_deckCardList.Count == 0)
+        if (_deckCardList.Count == 0)
         {
             if (_discardCardList.Count == 0)
                 return;
@@ -75,13 +83,7 @@ public class CardManager : MonoBehaviour
         _deckCardList.RemoveAt(0);
     }
 
-    public void DrawHandCard()
-    {
-        int count = initHandCount - _handCardList.Count;
-        if(count > 0)
-            DrawCards(count);
-    }
-	//region Private Methods
+
     private void ShuffleCardList(List<CardData> cardList)
     {
 
