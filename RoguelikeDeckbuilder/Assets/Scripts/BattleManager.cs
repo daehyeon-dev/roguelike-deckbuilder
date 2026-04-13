@@ -67,32 +67,19 @@ public class BattleManager : MonoBehaviour
 	//region Private Methods
 	private void PlayerAttack(int damage)
 	{
-		if (CurrentTurn != BattleTurnState.PlayerTurn)
-			return;
 		if (!_playerUnit.IsDead && !_enemyUnit.IsDead)
 		{
 			CurrentTurn = BattleTurnState.Busy;
 			_playerUnitAttack.Attack(_enemyUnit, damage);
-			if (_enemyUnit.IsDead)
-			{
-				TurnEnd();
-            }
-			else
-			{
-				StartEnemyTurn();
-            }
 		}
 	}
 	
 	private void PlayerHeal(int healAmount)
 	{
-		if (CurrentTurn != BattleTurnState.PlayerTurn)
-			return;
 		if(!_playerUnit.IsDead)
 		{
 			CurrentTurn = BattleTurnState.Busy;
 			_playerUnit.Heal(healAmount);
-			StartEnemyTurn() ;
 		}
 	}
 
@@ -154,7 +141,12 @@ public class BattleManager : MonoBehaviour
 		if (hand[index] == null)
 			return;
 
-		var card = hand[index];
+        if (CurrentTurn != BattleTurnState.PlayerTurn)
+            return;
+
+        var card = hand[index];
+
+		CurrentTurn = BattleTurnState.Busy;
 
 		if(card.damage > 0)
 		{
@@ -165,7 +157,16 @@ public class BattleManager : MonoBehaviour
 		{
 			PlayerHeal(card.healAmount);
         }
-	}
+
+        if (_enemyUnit.IsDead)
+        {
+            TurnEnd();
+        }
+        else
+        {
+            StartEnemyTurn();
+        }
+    }
 
 	private void SetHandData()
 	{

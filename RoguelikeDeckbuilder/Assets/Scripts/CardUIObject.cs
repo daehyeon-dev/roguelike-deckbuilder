@@ -48,7 +48,6 @@ public class CardUIObject : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Card Clicked");
         OnCardClicked?.Invoke(_cardIndex);
     }
     //region Gizmos
