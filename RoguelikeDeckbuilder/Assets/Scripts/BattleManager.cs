@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BattleManager : MonoBehaviour
@@ -55,6 +56,10 @@ public class BattleManager : MonoBehaviour
     {
 		RefreshHandUI();
         CurrentTurn = BattleTurnState.PlayerTurn;
+		foreach(var handCard in handUI)
+		{
+			handCard.OnCardClicked += UseCard;
+		}
     }
 
     private void Update()
@@ -158,6 +163,8 @@ public class BattleManager : MonoBehaviour
 			PlayerHeal(card.healAmount);
         }
 
+		Discard(index);
+
         if (_enemyUnit.IsDead)
         {
             TurnEnd();
@@ -170,17 +177,26 @@ public class BattleManager : MonoBehaviour
 
 	private void RefreshHandUI()
 	{
-        for (int i = 0; i < hand.Count; i++)
+        for (int i = 0; i < handUI.Count; i++)
         {
-			if (handUI[i] == null)
+			if (i < hand.Count && hand[i] != null)
 			{
-				Debug.Log($"{i} handUI is Null.");
-				return;
+                handUI[i].SetCardData(hand[i], i);
+                
 			}
-            handUI[i].SetCardData(hand[i], i);
-			handUI[i].OnCardClicked += UseCard;
+			else
+			{
+                Debug.Log($"{i} hand is Null.");
+				handUI[i].Hide();
+            }
         }
     }
-	//region Gizmos
+
+	private void Discard(int index)
+	{
+		hand.RemoveAt(index);
+		RefreshHandUI();
+	}
+    //region Gizmos
 
 }

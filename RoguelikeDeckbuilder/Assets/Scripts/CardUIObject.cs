@@ -38,12 +38,31 @@ public class CardUIObject : MonoBehaviour, IPointerClickHandler
 	//region Public Methods
 	public void SetCardData(CardData cardData, int cardIndex)
 	{
+		if(gameObject.activeSelf == false)
+		{
+			gameObject.SetActive(true);
+		}
 		_cardData = cardData;
 		_cardIndex = cardIndex;
 		DrawCardUI();
 	}
+
+	public void Hide()
+	{
+        _cardText.text = String.Empty;
+		_cardData = null;
+		_cardIndex = -1;
+        gameObject.SetActive(false);
+	}
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        OnCardClicked?.Invoke(_cardIndex);
+    }
+
+
     //region Private Methods
-	private void DrawCardUI()
+    private void DrawCardUI()
 	{
 		_cardText.text = $"{_cardData.name}\nCost: {_cardData.cost}";
 		if(_cardData.damage > 0)
@@ -56,10 +75,6 @@ public class CardUIObject : MonoBehaviour, IPointerClickHandler
 		}
 	}
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        OnCardClicked?.Invoke(_cardIndex);
-    }
     //region Gizmos
 
 }
