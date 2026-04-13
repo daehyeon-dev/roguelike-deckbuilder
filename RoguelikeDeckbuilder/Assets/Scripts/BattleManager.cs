@@ -23,8 +23,10 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private BattleUnitBase _enemyUnit;
 	[SerializeField] private UnitAttack _enemyUnitAttack;
 	[Header("UI")]
-	[SerializeField] private List<CardData> hand = new List<CardData>();
+	//[SerializeField] private List<CardData> hand = new List<CardData>();
 	[SerializeField] private List<CardUIObject> handUI = new List<CardUIObject>();
+	[Header("Manager")]
+	[SerializeField] private CardManager _cardManager;
 	//private variables
 	private BattleTurnState _currentTurn;
 	//private components
@@ -140,16 +142,15 @@ public class BattleManager : MonoBehaviour
 
 	private void UseCard(int index)
 	{
-		if (index >= hand.Count)
-			return;
-
-		if (hand[index] == null)
-			return;
-
         if (CurrentTurn != BattleTurnState.PlayerTurn)
             return;
 
-        var card = hand[index];
+        var card = _cardManager.GetHandCard(index);
+
+		if(card == null)
+		{
+			return;
+		}
 
 		CurrentTurn = BattleTurnState.Busy;
 
@@ -179,10 +180,10 @@ public class BattleManager : MonoBehaviour
 	{
         for (int i = 0; i < handUI.Count; i++)
         {
-			if (i < hand.Count && hand[i] != null)
+			var hand = _cardManager.GetHandCard(i);
+			if (hand != null)
 			{
-                handUI[i].SetCardData(hand[i], i);
-                
+                handUI[i].SetCardData(hand, i);
 			}
 			else
 			{
@@ -194,7 +195,7 @@ public class BattleManager : MonoBehaviour
 
 	private void Discard(int index)
 	{
-		hand.RemoveAt(index);
+		_cardManager.DiscardFromHand(index);
 		RefreshHandUI();
 	}
     //region Gizmos

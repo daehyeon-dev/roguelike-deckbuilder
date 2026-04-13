@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 43752430}
   - component: {fileID: 43752429}
   - component: {fileID: 43752432}
+  - component: {fileID: 43752433}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -249,14 +250,11 @@ MonoBehaviour:
   _playerUnitAttack: {fileID: 1631615802}
   _enemyUnit: {fileID: 1592291029}
   _enemyUnitAttack: {fileID: 1592291030}
-  hand:
-  - {fileID: 11400000, guid: e965da71cbf0aac41a3e0e39eb18c37c, type: 2}
-  - {fileID: 11400000, guid: 7e1c396aa98d895448beb2a98366440a, type: 2}
-  - {fileID: 11400000, guid: f447a1e64a8b4d24385de1bb7668450e, type: 2}
   handUI:
   - {fileID: 2045560036}
   - {fileID: 1914382475}
   - {fileID: 2033473785}
+  _cardManager: {fileID: 43752433}
 --- !u!114 &43752430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,6 +300,24 @@ MonoBehaviour:
   _enemyHP: {fileID: 300878568}
   _player: {fileID: 1631615798}
   _enemy: {fileID: 1592291029}
+--- !u!114 &43752433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43752428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 811c5237be57dea44956d321c45ca82c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _handCardList:
+  - {fileID: 11400000, guid: e965da71cbf0aac41a3e0e39eb18c37c, type: 2}
+  - {fileID: 11400000, guid: 7e1c396aa98d895448beb2a98366440a, type: 2}
+  - {fileID: 11400000, guid: f447a1e64a8b4d24385de1bb7668450e, type: 2}
+  _discardCardList: []
+  _deckCardList: []
 --- !u!1 &300878566
 GameObject:
   m_ObjectHideFlags: 0
