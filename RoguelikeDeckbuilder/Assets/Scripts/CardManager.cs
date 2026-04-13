@@ -106,7 +106,14 @@ public class CardManager : MonoBehaviour
 
     private void ShuffleCardList(List<CardData> cardList)
     {
+        for(int i = cardList.Count - 1; i > 0; i--)
+        {
+            int randomIndex = Random.Range(0, i + 1);
 
+            var temp = cardList[i];
+            cardList[i] = cardList[randomIndex];
+            cardList[randomIndex] = temp;
+        }
     }
 
     private void fillCardToDeck()
