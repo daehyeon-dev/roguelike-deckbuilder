@@ -23,6 +23,7 @@ public class BattleManager : MonoBehaviour
 	[SerializeField] private UnitAttack _enemyUnitAttack;
 	[Header("UI")]
 	[SerializeField] private List<CardData> hand = new List<CardData>();
+	[SerializeField] private List<CardUIObject> handUI = new List<CardUIObject>();
 	//private variables
 	private BattleTurnState _currentTurn;
 	//private components
@@ -52,7 +53,8 @@ public class BattleManager : MonoBehaviour
 
     private void Start()
     {
-		CurrentTurn = BattleTurnState.PlayerTurn;
+		SetHandData();
+        CurrentTurn = BattleTurnState.PlayerTurn;
     }
 
     private void Update()
@@ -149,6 +151,9 @@ public class BattleManager : MonoBehaviour
 		if (index >= hand.Count)
 			return;
 
+		if (hand[index] == null)
+			return;
+
 		var card = hand[index];
 
 		if(card.damage > 0)
@@ -159,10 +164,22 @@ public class BattleManager : MonoBehaviour
 		if(card.healAmount > 0)
 		{
 			PlayerHeal(card.healAmount);
-
         }
 	}
 
+	private void SetHandData()
+	{
+        for (int i = 0; i < hand.Count; i++)
+        {
+			if (handUI[i] == null)
+			{
+				Debug.Log($"{i} handUI is Null.");
+				return;
+			}	
+            handUI[i].SetCardData(hand[i], i);
+			handUI[i].OnCardClicked += UseCard;
+        }
+    }
 	//region Gizmos
 
 }
