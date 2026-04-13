@@ -107,7 +107,8 @@ public class BattleManager : MonoBehaviour
 		{
 			CurrentTurn = BattleTurnState.PlayerTurn;
 		}
-	}
+		DrawHandCard();
+    }
 
 	private void StartEnemyTurn()
 	{
@@ -197,6 +198,18 @@ public class BattleManager : MonoBehaviour
 	{
 		_cardManager.DiscardFromHand(index);
 		RefreshHandUI();
+	}
+
+	private void DrawCard()
+	{
+		_cardManager.DrawCard();
+		RefreshHandUI() ;
+	}
+
+	private void DrawHandCard()
+	{
+		_cardManager.DrawHandCard();
+		RefreshHandUI() ;
 	}
     //region Gizmos
 
