@@ -53,7 +53,7 @@ public class BattleManager : MonoBehaviour
 
     private void Start()
     {
-		SetHandData();
+		RefreshHandUI();
         CurrentTurn = BattleTurnState.PlayerTurn;
     }
 
@@ -168,7 +168,7 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-	private void SetHandData()
+	private void RefreshHandUI()
 	{
         for (int i = 0; i < hand.Count; i++)
         {
@@ -176,7 +176,7 @@ public class BattleManager : MonoBehaviour
 			{
 				Debug.Log($"{i} handUI is Null.");
 				return;
-			}	
+			}
             handUI[i].SetCardData(hand[i], i);
 			handUI[i].OnCardClicked += UseCard;
         }
