@@ -29,16 +29,29 @@ public class BattleManager : MonoBehaviour
 	[SerializeField] private CardManager _cardManager;
 	//private variables
 	private BattleTurnState _currentTurn;
+    private int _maxEnergy = 3;
+	private int _currentEnergy;
 	//private components
 
 	//Events
 	public event Action OnTurnChanged;
+	public event Action<int, int> OnEnergyChanged;
 	//public property
 	public BattleTurnState CurrentTurn
 	{
 		get { return _currentTurn; }
 		set { _currentTurn = value;
 			OnTurnChanged?.Invoke();
+		}
+	}
+
+	public int CurrentEnergy
+	{
+		get { return _currentEnergy; }
+		set
+		{
+			_currentEnergy = value;
+			OnEnergyChanged?.Invoke(CurrentEnergy, _maxEnergy);
 		}
 	}
 	//Unity Lifecycle
@@ -58,12 +71,11 @@ public class BattleManager : MonoBehaviour
 
     private void Start()
     {
-        CurrentTurn = BattleTurnState.PlayerTurn;
-		foreach(var handCard in handUI)
+        foreach (var handCard in handUI)
 		{
 			handCard.OnCardClicked += UseCard;
 		}
-		DrawHandCard();
+		StartPlayerTurn();
     }
 
     private void Update()
@@ -72,6 +84,10 @@ public class BattleManager : MonoBehaviour
     }
 	
 	//region Public Methods
+	public void CallPlayerTurnEnd()
+	{
+		PlayerTurnEnd();
+	}
 
 	//region Private Methods
 	private void PlayerAttack(int damage)
@@ -109,6 +125,7 @@ public class BattleManager : MonoBehaviour
 		{
 			CurrentTurn = BattleTurnState.PlayerTurn;
 		}
+		SetCurrentEnergy();
 		DrawHandCard();
     }
 
@@ -121,7 +138,7 @@ public class BattleManager : MonoBehaviour
         }
 	}
 
-	private void TurnEnd()
+	private void BattleEnd()
 	{
 		if(CurrentTurn != BattleTurnState.BattleEnd)
 		{
@@ -135,7 +152,7 @@ public class BattleManager : MonoBehaviour
         _enemyUnitAttack.Attack(_playerUnit);
         if (_playerUnit.IsDead)
         {
-            TurnEnd();
+            BattleEnd();
         }
         else
         {
@@ -148,16 +165,25 @@ public class BattleManager : MonoBehaviour
         if (CurrentTurn != BattleTurnState.PlayerTurn)
             return;
 
-        var card = _cardManager.TakeHandCard(index);
+        var card = _cardManager.GetHandCard(index);
 
 		if(card == null)
 		{
 			return;
 		}
+        CurrentTurn = BattleTurnState.Busy;
 
-		CurrentTurn = BattleTurnState.Busy;
+        if (card.cost > CurrentEnergy)
+        {
+            Debug.Log("에너지가 부족합니다.");
+			CurrentTurn = BattleTurnState.PlayerTurn;
+            return;
+        }
 
-		if(card.damage > 0)
+
+		card = _cardManager.TakeHandCard(index);
+
+        if (card.damage > 0)
 		{
 			PlayerAttack(card.damage);
 		}
@@ -172,16 +198,24 @@ public class BattleManager : MonoBehaviour
 			DrawCard(card.drawAmount);
 		}
 
+		CurrentEnergy -= card.cost;
+
 		Discard(card);
 
         if (_enemyUnit.IsDead)
         {
-            TurnEnd();
+            BattleEnd();
+			return;
         }
-        else
-        {
-            StartEnemyTurn();
-        }
+
+
+		CurrentTurn = BattleTurnState.PlayerTurn;
+
+		if(_cardManager.IsHandEmpty())
+		{
+			PlayerTurnEnd();
+			return;
+		}
     }
 
 	private void RefreshHandUI()
@@ -195,11 +229,24 @@ public class BattleManager : MonoBehaviour
 			}
 			else
 			{
-                Debug.Log($"{i} hand is Null.");
+                //Debug.Log($"{i} hand is Null.");
 				handUI[i].Hide();
             }
         }
     }
+
+	private void PlayerTurnEnd()
+	{
+        if (CurrentTurn != BattleTurnState.PlayerTurn)
+        {
+			return;
+        }
+        if (!_enemyUnit.IsDead)
+		{
+			DiscardAllHand();
+            StartEnemyTurn();
+        }
+	}
 
 	//private void Discard(int index)
 	//{
@@ -213,6 +260,15 @@ public class BattleManager : MonoBehaviour
 		RefreshHandUI();
 	}
 
+	private void DiscardAllHand()
+	{
+		while(_cardManager.IsHandEmpty() == false)
+		{
+            _cardManager.DiscardFromHand(0);
+        }
+		RefreshHandUI() ;
+	}
+
 	private void DrawCard(int count)
 	{
 		_cardManager.DrawCards(count);
@@ -224,6 +280,11 @@ public class BattleManager : MonoBehaviour
 		_cardManager.DrawHandCard();
 		RefreshHandUI() ;
 	}
+
+	private void SetCurrentEnergy()
+	{
+        CurrentEnergy = _maxEnergy;
+    }
     //region Gizmos
 
 }

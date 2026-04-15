@@ -12,6 +12,7 @@ public class BattleUIManager : MonoBehaviour
 	[SerializeField] private TMP_Text _turnText;
 	[SerializeField] private TMP_Text _playerHP;
 	[SerializeField] private TMP_Text _enemyHP;
+    [SerializeField] private TMP_Text _energyText;
 	[Header("Objects")]
 	[SerializeField] private BattleUnitBase _player;
 	[SerializeField] private BattleUnitBase _enemy;
@@ -35,6 +36,7 @@ public class BattleUIManager : MonoBehaviour
 		_battleManager.OnTurnChanged += RefreshTurnText;
         _player.OnHPChanged += RefreshPlayerHPText;
         _enemy.OnHPChanged += RefreshEnemyHPText;
+        _battleManager.OnEnergyChanged += RefreshEnergyText;
     }
 
     private void Start()
@@ -46,6 +48,14 @@ public class BattleUIManager : MonoBehaviour
     private void Update()
     {
         
+    }
+
+    private void OnDisable()
+    {
+        _battleManager.OnTurnChanged -= RefreshTurnText;
+        _player.OnHPChanged -= RefreshPlayerHPText;
+        _enemy.OnHPChanged -= RefreshEnemyHPText;
+        _battleManager.OnEnergyChanged -= RefreshEnergyText;
     }
 
     //region Public Methods
@@ -74,6 +84,11 @@ public class BattleUIManager : MonoBehaviour
     private void RefreshHPText(TMP_Text targetText, int currentHP, int maxHP)
     {
         targetText.text = $"{currentHP} / {maxHP}";
+    }
+
+    private void RefreshEnergyText(int currentEnergy, int maxEnergy)
+    {
+        _energyText.text = $"Energy\n{currentEnergy} / {maxEnergy}";
     }
     //region Gizmos
 

@@ -87,6 +87,15 @@ public class CardManager : MonoBehaviour
         if(count > 0)
             DrawCards(count);
     }
+
+    public bool IsHandEmpty()
+    {
+        if(_handCardList.Count == 0)
+        {
+            return true;
+        }
+        return false;
+    }
     //region Private Methods
     private void DrawCard()
     {
