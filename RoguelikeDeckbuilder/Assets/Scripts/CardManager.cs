@@ -50,7 +50,10 @@ public class CardManager : MonoBehaviour
     public CardData TakeHandCard(int index)
     {
         if (index >= _handCardList.Count || _handCardList[index] == null)
+        {
             return null;
+        }
+            
         else
         {
             var card = _handCardList[index];

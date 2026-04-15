@@ -52,6 +52,8 @@ public class BattleManager : MonoBehaviour
         InputManager.Instance.OnCardSlot1Pressed += () => UseCard(0);
         InputManager.Instance.OnCardSlot2Pressed += () => UseCard(1);
 		InputManager.Instance.OnCardSlot3Pressed += () => UseCard(2);
+		InputManager.Instance.OnCardSlot4Pressed += () => UseCard(3);
+		InputManager.Instance.OnCardSlot4Pressed -= () => UseCard(4);
     }
 
     private void Start()

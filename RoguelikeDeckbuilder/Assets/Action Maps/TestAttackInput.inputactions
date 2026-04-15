@@ -32,6 +32,24 @@
                     "processors": "",
                     "interactions": "Press",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "FourthCardUse",
+                    "type": "Button",
+                    "id": "7467af14-001c-4ef7-b751-2ef15b0cc92c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FifthCardUse",
+                    "type": "Button",
+                    "id": "e2de8a4e-95f2-4d5a-8a54-c56878761e57",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -65,6 +83,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "ThirdCardUse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "924045aa-e655-41eb-b196-9b12748b8a00",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FourthCardUse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c5d6516f-453b-440d-982c-832569f9b05b",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FifthCardUse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

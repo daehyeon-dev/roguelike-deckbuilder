@@ -118,6 +118,24 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FourthCardUse"",
+                    ""type"": ""Button"",
+                    ""id"": ""7467af14-001c-4ef7-b751-2ef15b0cc92c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FifthCardUse"",
+                    ""type"": ""Button"",
+                    ""id"": ""e2de8a4e-95f2-4d5a-8a54-c56878761e57"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -153,6 +171,28 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
                     ""action"": ""ThirdCardUse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""924045aa-e655-41eb-b196-9b12748b8a00"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FourthCardUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c5d6516f-453b-440d-982c-832569f9b05b"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FifthCardUse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -181,6 +221,8 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
         m_TestAttack_FirstCardUse = m_TestAttack.FindAction("FirstCardUse", throwIfNotFound: true);
         m_TestAttack_SecondCardUse = m_TestAttack.FindAction("SecondCardUse", throwIfNotFound: true);
         m_TestAttack_ThirdCardUse = m_TestAttack.FindAction("ThirdCardUse", throwIfNotFound: true);
+        m_TestAttack_FourthCardUse = m_TestAttack.FindAction("FourthCardUse", throwIfNotFound: true);
+        m_TestAttack_FifthCardUse = m_TestAttack.FindAction("FifthCardUse", throwIfNotFound: true);
     }
 
     ~@TestAttackInput()
@@ -264,6 +306,8 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_TestAttack_FirstCardUse;
     private readonly InputAction m_TestAttack_SecondCardUse;
     private readonly InputAction m_TestAttack_ThirdCardUse;
+    private readonly InputAction m_TestAttack_FourthCardUse;
+    private readonly InputAction m_TestAttack_FifthCardUse;
     /// <summary>
     /// Provides access to input actions defined in input action map "TestAttack".
     /// </summary>
@@ -287,6 +331,14 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "TestAttack/ThirdCardUse".
         /// </summary>
         public InputAction @ThirdCardUse => m_Wrapper.m_TestAttack_ThirdCardUse;
+        /// <summary>
+        /// Provides access to the underlying input action "TestAttack/FourthCardUse".
+        /// </summary>
+        public InputAction @FourthCardUse => m_Wrapper.m_TestAttack_FourthCardUse;
+        /// <summary>
+        /// Provides access to the underlying input action "TestAttack/FifthCardUse".
+        /// </summary>
+        public InputAction @FifthCardUse => m_Wrapper.m_TestAttack_FifthCardUse;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -322,6 +374,12 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
             @ThirdCardUse.started += instance.OnThirdCardUse;
             @ThirdCardUse.performed += instance.OnThirdCardUse;
             @ThirdCardUse.canceled += instance.OnThirdCardUse;
+            @FourthCardUse.started += instance.OnFourthCardUse;
+            @FourthCardUse.performed += instance.OnFourthCardUse;
+            @FourthCardUse.canceled += instance.OnFourthCardUse;
+            @FifthCardUse.started += instance.OnFifthCardUse;
+            @FifthCardUse.performed += instance.OnFifthCardUse;
+            @FifthCardUse.canceled += instance.OnFifthCardUse;
         }
 
         /// <summary>
@@ -342,6 +400,12 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
             @ThirdCardUse.started -= instance.OnThirdCardUse;
             @ThirdCardUse.performed -= instance.OnThirdCardUse;
             @ThirdCardUse.canceled -= instance.OnThirdCardUse;
+            @FourthCardUse.started -= instance.OnFourthCardUse;
+            @FourthCardUse.performed -= instance.OnFourthCardUse;
+            @FourthCardUse.canceled -= instance.OnFourthCardUse;
+            @FifthCardUse.started -= instance.OnFifthCardUse;
+            @FifthCardUse.performed -= instance.OnFifthCardUse;
+            @FifthCardUse.canceled -= instance.OnFifthCardUse;
         }
 
         /// <summary>
@@ -416,5 +480,19 @@ public partial class @TestAttackInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnThirdCardUse(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "FourthCardUse" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFourthCardUse(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "FifthCardUse" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFifthCardUse(InputAction.CallbackContext context);
     }
 }

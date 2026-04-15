@@ -12,6 +12,8 @@ public class InputManager : MonoBehaviour
     private InputAction _firstCardInput;
     private InputAction _secondCardInput;
     private InputAction _thirdCardInput;
+    private InputAction _fourthCardInput;
+    private InputAction _fifthCardInput;
     //private InputAction _eAttackInput;
     //private components
     private PlayerInput _playerInput;
@@ -19,6 +21,8 @@ public class InputManager : MonoBehaviour
     public event Action OnCardSlot1Pressed;
     public event Action OnCardSlot2Pressed;
     public event Action OnCardSlot3Pressed;
+    public event Action OnCardSlot4Pressed;
+    public event Action OnCardSlot5Pressed;
     //public property
     public static InputManager Instance { get; private set; }
 	//Unity Lifecycle
@@ -39,6 +43,8 @@ public class InputManager : MonoBehaviour
         _firstCardInput = _playerInput.actions["FirstCardUse"];
         _secondCardInput = _playerInput.actions["SecondCardUse"];
         _thirdCardInput = _playerInput.actions["ThirdCardUse"];
+        _fourthCardInput = _playerInput.actions["FourthCardUse"];
+        _fifthCardInput = _playerInput.actions["FifthCardUse"];
     }
 
     private void OnEnable()
@@ -46,6 +52,8 @@ public class InputManager : MonoBehaviour
 		_firstCardInput.performed += HandleFirstCard;
         _secondCardInput.performed += HandleSecondCard;
         _thirdCardInput.performed += HandleThirdCard;
+        _fourthCardInput.performed += HandleFourthCard;
+        _fifthCardInput.performed += HandleFifthCard;
     }
 
     private void Start()
@@ -63,6 +71,8 @@ public class InputManager : MonoBehaviour
         _firstCardInput.performed -= HandleFirstCard;
         _secondCardInput.performed -= HandleSecondCard;
         _thirdCardInput.performed -= HandleThirdCard;
+        _fourthCardInput.performed-= HandleFourthCard;
+        _fifthCardInput.performed -= HandleFifthCard;
     }
 
     //region Public Methods
@@ -82,6 +92,15 @@ public class InputManager : MonoBehaviour
     {
         OnCardSlot3Pressed?.Invoke();
     }
+    private void HandleFourthCard(InputAction.CallbackContext context)
+    {
+        OnCardSlot4Pressed?.Invoke();
+    }
+    private void HandleFifthCard(InputAction.CallbackContext context)
+    {
+        OnCardSlot5Pressed?.Invoke();
+    }
+
     //region Gizmos
 
 }
